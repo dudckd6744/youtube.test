@@ -48,7 +48,17 @@ router.post('/uploadVideo',(req,res)=>{
     })
 })
 
-router.post('/getVideo',(req,res)=>{
+router.post('/getVideoDetail',(req,res)=>{
+
+    Video.findOne({_id:req.body.videoId})
+    .populate('writer')
+    .exec((err,videoDetails)=> {
+        if(err) return res.json({success:false, err})
+        res.status(200).json({success:true, videoDetails})
+    })
+})
+
+router.get('/getVideo',(req,res)=>{
 
     Video.find()
     .populate('writer')
