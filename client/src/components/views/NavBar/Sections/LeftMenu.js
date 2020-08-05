@@ -8,8 +8,8 @@ function LeftMenu(props) {
     <Menu.Item key="mail">
       <a href="/">Home</a>
     </Menu.Item>
-    <Menu.Item key="video">
-      <a href="/video">Video</a>
+    <Menu.Item key="subscription">
+      <a href="/subscription">subscription</a>
     </Menu.Item>
 
   </Menu>

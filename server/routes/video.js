@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Video } = require("../models/Vidoe");
+const {Subscriber} = require("../models/Subscriber")
 
 const { auth } = require("../middleware/auth");
 const multer = require('multer');
@@ -65,6 +66,38 @@ router.get('/getVideo',(req,res)=>{
     .exec((err,videos)=> {
         if(err) return res.json({success:false, err})
         res.status(200).json({success:true, videos})
+    })
+})
+
+router.get('/getVideos',(req,res)=>{
+
+    Video.find()
+    .populate('writer')
+    .exec((err,videos)=> {
+        if(err) return res.json({success:false, err})
+        res.status(200).json({success:true, videos})
+    })
+})
+
+router.post('/getSubscriptionVideos',(req,res)=>{
+
+    Subscriber.find({ userFrom: req.body.userFrom})
+    .exec((err, subscribeInfo)=>{
+        console.log(subscribeInfo)
+        if(err) return res.status(400).send(err)
+
+        var subscribedUser = [];
+        subscribeInfo.map((subscriber, index)=>{
+            subscribedUser.push(subscriber.userTo)
+        })
+        console.log(subscribedUser)    
+
+        Video.find({writer: {$in: subscribedUser}})
+        .populate('writer')
+        .exec((err,videos)=> {
+            if(err) return res.json({success:false, err})
+            res.status(200).json({success:true, videos})
+        })
     })
 })
 

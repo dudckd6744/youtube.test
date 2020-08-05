@@ -51,3 +51,20 @@ input.error {
   font-weight: 00;
   line-height: 12px;
 }
+
+.durations {
+  margin-left:143px;
+  margin-top: -13px;
+  margin-bottom: -90px;
+  width: 54px;
+  right: 0;
+  color: #fff;
+  background-color: black;
+  opacity: 0.9;
+  padding:  0.7px 0.8px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 12px;
+}

@@ -6,11 +6,17 @@ import moment from 'moment';
 const {Title} = Typography;
 const {Meta} = Card;
 
-function LandingPage() {
+function LandingPage(props) {
     const [Video, setVideo] = useState([])
     
     useEffect(() => {
-        Axios.get('/api/video/getVideo')
+
+        const  varialbe={
+            userTo: props.userTo,
+            userFrom:localStorage.getItem('userId')
+        }
+
+        Axios.post('/api/video/getSubscriptionVideos',varialbe)
             .then(response => {
                 if(response.data.success){
                     console.log(response.data)
@@ -19,7 +25,7 @@ function LandingPage() {
                     alert('video get is false!')
                 }
         })
-    }, [])
+    }, [props.userTo])
 
     var renderCard = Video.map((video, index)=> {
 
@@ -67,3 +73,4 @@ function LandingPage() {
 }
 
 export default LandingPage
+
